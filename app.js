@@ -74,8 +74,18 @@ app.get("/current-observations", (request, response, next) => {
 
 // Set Station Location
 app.post("/set-station-location", (request, response) => {
-    // Store this in the StationLocation table
-    console.log(request.body.lat + ", " + request.body.lng);
+
+    if ((request.body.lat && request.body.lng) || request.body.elev) {
+        // Store this in the StationLocation table
+        console.log("Latitude: " + request.body.lat + "\nLongitude: " + request.body.lng + "\nElevation: " + request.body.elev);
+
+        // 200 OK
+        response.sendStatus(200);
+    } else {
+        // 400 Malformed Query
+        response.sendStatus(400)
+    }
+
 })
 
 // catch 404 and forward to error handler

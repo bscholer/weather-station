@@ -1,4 +1,8 @@
 $(function () {
+    refreshData();
+});
+
+function refreshData() {
     $.ajax({
         headers: { "Accept": "application/json"},
         type: 'GET',
@@ -28,7 +32,7 @@ $(function () {
             console.log(err);
         }
     });
-});
+}
 
 // Source: https://gist.github.com/basarat/4670200
 function getCardinal(angle) {

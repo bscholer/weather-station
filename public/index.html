@@ -187,8 +187,9 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    <a href="#" class="d-none d-sm-inline-block btn btn-primary shadow-sm" onclick="refreshData()">
+                        <i class="fa fa-sync-alt text-white-50"></i>
+                    </a>
                 </div>
 
                 <!-- Content Row -->
@@ -223,7 +224,8 @@
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Humidity
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="current_humidity">Loading...
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="current_humidity">
+                                            Loading...
                                         </div>
                                     </div>
                                     <div class="col-auto">
@@ -283,7 +285,7 @@
 
                     <!-- Set Station Location Card -->
                     <div class="col-xl-6 col-md-6 mb-4">
-                        <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="card border-left-warning shadow h-100 py-2" id="station_location_card">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
@@ -292,11 +294,13 @@
                                         </div>
                                         <form class="d-none d-sm-inline-block form-inline  ml-md-12 my-2 my-md-0 w-75 mw-100">
                                             <div class="input-group">
-                                                <input type="text" class="form-control bg-light border-0 small" id="set_station_location_address_input"
+                                                <input type="text" class="form-control bg-light border-0 small"
+                                                       id="set_station_location_address_input"
                                                        placeholder="200 S Martin Jischke Dr, West Lafayette, IN 47906"
                                                        aria-label="Search" aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-primary" type="button" onclick="setStationLocation()">
+                                                    <button class="btn btn-primary" type="button"
+                                                            onclick="setStationLocation()">
                                                         <i class="fas fa-search fa-sm"></i>
                                                     </button>
                                                 </div>
@@ -540,26 +544,26 @@
                 <!--                            </div>-->
 
                 <!--                        </div>-->
-<!--            </div>-->
+                <!--            </div>-->
+
+            </div>
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- /.container-fluid -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Ben Scholer, Jackson Birkofer 2020</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
 
     </div>
-    <!-- End of Main Content -->
-
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Ben Scholer, Jackson Birkofer 2020</span>
-            </div>
-        </div>
-    </footer>
-    <!-- End of Footer -->
-
-</div>
-<!-- End of Content Wrapper -->
+    <!-- End of Content Wrapper -->
 
 </div>
 <!-- End of Page Wrapper -->
@@ -583,9 +587,11 @@
 <script src="vendor/chart.js/Chart.min.js"></script>
 
 <!-- Google Maps API -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvkmFPFfFPk38gKJDZyOsCkliDoTs0r1k&callback=initMap"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvkmFPFfFPk38gKJDZyOsCkliDoTs0r1k&callback=initMap"></script>
 <!-- Initialize it -->
-<script>window.initMap = function () {}</script>
+<script>window.initMap = function () {
+}</script>
 
 <!-- Page level custom scripts -->
 <!--<script src="js/demo/chart-area-demo.js"></script>-->
