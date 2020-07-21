@@ -53,7 +53,7 @@ app.get("/current-observations", (request, response, next) => {
                     humidity: 40,
                     qcStatus: 1,
                     imperial: {
-                        temp: 90,
+                        temp: 100,
                         heatIndex: 110,
                         dewpt: 54,
                         windChill: 53,
@@ -69,8 +69,6 @@ app.get("/current-observations", (request, response, next) => {
         }
     );
 });
-
-
 
 // Set Station Location
 app.post("/set-station-location", (request, response) => {

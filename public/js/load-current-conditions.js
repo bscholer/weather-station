@@ -24,6 +24,7 @@ function refreshData() {
             let dewPoint = imperial.dewpt;
             let heatIndex = imperial.heatIndex;
             let windChill = imperial.windChill;
+            let precipTotal = imperial.precipTotal;
 
             // If we can't use heat index or wind chill for the feels like, just use the current temperature.
             let feelsLikeTemp = temp;
@@ -42,6 +43,7 @@ function refreshData() {
             $("#current_atmospheric_pressure").text(atmosphericPressure + " inHg");
             $("#current_wind_speed_dir").text(windSpeed + " mph " + windDir);
             $("#current_feels_like").text(feelsLikeTemp + " °F");
+            $("#current_precipitation").text(precipTotal + " in");
 
             setFAClassFromTemp($("#current_temp_icon"), temp);
             setFAClassFromTemp($("#current_feels_like_icon"), feelsLikeTemp);

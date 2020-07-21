@@ -6,3 +6,7 @@ body {
 a {
   color: #00B7FF;
 }
+
+#refresh_icon {
+  transition: ease-in-out 1s;
+}
