@@ -6,7 +6,7 @@ function refreshData() {
     $.ajax({
         headers: {"Accept": "application/json"},
         type: 'GET',
-        url: 'http://127.0.0.1:3000/current-observations',
+        url: 'http://192.168.0.197:3000/current-observations',
         crossDomain: true,
         beforeSend: function (xhr) {
             xhr.withCredentials = true;
