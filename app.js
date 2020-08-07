@@ -1,3 +1,14 @@
+const BME280 = require('bme280-sensor');
+
+// The BME280 constructor options are optional.
+const options = {
+  i2cBusNo   : 1, // defaults to 1
+  i2cAddress : BME280.BME280_DEFAULT_I2C_ADDRESS() // defaults to 0x77
+};
+const bme280 = new BME280(options);
+bme280.init()
+
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -34,7 +45,18 @@ app.use('/users', usersRouter);
 
 // Current observations, https://docs.google.com/document/d/1KGb8bTVYRsNgljnNH67AMhckY8AQT2FVwZ9urj8SWBs/edit
 app.get("/current-observations", (request, response, next) => {
-    response.json({
+      	console.log(readSensorData());
+	
+	bme280.readSensorData()
+    .then((data) => {
+      // temperature_C, pressure_hPa, and humidity are returned by default.
+      // I'll also calculate some unit conversions for display purposes.
+      //
+      data.temperature_F = BME280.convertCelciusToFahrenheit(data.temperature_C);
+      data.pressure_inHg = BME280.convertHectopascalToInchesOfMercury(data.pressure_hPa);
+
+	console.log(data); 
+	response.json({
             observations: [
                 {
                     stationID: "KNCCARY89",
@@ -53,13 +75,13 @@ app.get("/current-observations", (request, response, next) => {
                     humidity: 40,
                     qcStatus: 1,
                     imperial: {
-                        temp: 100,
+                        temp: data.temperature_F,
                         heatIndex: 110,
                         dewpt: 54,
                         windChill: 53,
                         windSpeed: 2,
                         windGust: null,
-                        pressure: 30.09,
+                        pressure: data.pressure_inHg,
                         precipRate: 0.0,
                         precipTotal: 0.0,
                         elev: 413
@@ -68,7 +90,38 @@ app.get("/current-observations", (request, response, next) => {
             ]
         }
     );
+      //console.log(`data = ${JSON.stringify(data, null, 2)}`);
+      setTimeout(readSensorData, 2000);
+    })
+    .catch((err) => {
+
+	    console.log(`BME280 read error: ${err}`);
+      
+	    setTimeout(readSensorData, 2000);
+    });
+	
 });
+
+const readSensorData = () => {
+  bme280.readSensorData()
+    .then((data) => {
+      // temperature_C, pressure_hPa, and humidity are returned by default.
+      // I'll also calculate some unit conversions for display purposes.
+      //
+      data.temperature_F = BME280.convertCelciusToFahrenheit(data.temperature_C);
+      data.pressure_inHg = BME280.convertHectopascalToInchesOfMercury(data.pressure_hPa);
+
+	return data; 
+
+      //console.log(`data = ${JSON.stringify(data, null, 2)}`);
+      setTimeout(readSensorData, 2000);
+    })
+    .catch((err) => {
+      console.log(`BME280 read error: ${err}`);
+      setTimeout(readSensorData, 2000);
+    });
+};
+
 
 // Set Station Location
 app.post("/set-station-location", (request, response) => {
