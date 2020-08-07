@@ -38,7 +38,7 @@ function refreshData() {
             }
 
             // Set the values in the DOM
-            $("#current_temp").text(temp + " °F");
+            $("#current_temp").text(temp.toFixed(1) + " °F");
             $("#current_humidity").text(humidity + "%");
             $("#current_atmospheric_pressure").text(atmosphericPressure + " inHg");
             $("#current_wind_speed_dir").text(windSpeed + " mph " + windDir);
